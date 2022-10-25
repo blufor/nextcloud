@@ -248,4 +248,7 @@ if expr "$1" : "apache" 1>/dev/null || [ "$1" = "php-fpm" ] || [ "${NEXTCLOUD_UP
 
 fi
 
+# for vault dynamic password changes
+test -n "${POSTGRES_PASSWORD+x}" && sed -iE "s|'db_password' => '(.+)'|'db_password' => '${POSTGRES_PASSWORD}'|" /mnt/config/config.php
+
 exec "$@"
